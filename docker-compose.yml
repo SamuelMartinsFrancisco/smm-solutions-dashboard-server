@@ -1,0 +1,16 @@
+version: "3.8"
+
+services:
+  mongodb: mongo:6.0
+  container_name: mongodb
+  restart: always
+  ports:
+    - "${MONGO_PORT}:27017"
+  environment:
+    MONGO_INITDB_ROOT_USERNAME: ${MONGO_INITDB_ROOT_USERNAME}
+    MONGO_INITDB_ROOT_USERNAME: ${MONGO_INITDB_ROOT_USERNAME}
+  volumes: 
+    - mongo_data:/data/db
+
+volumes:
+  mongo_data:

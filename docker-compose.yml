@@ -5,7 +5,7 @@ services:
     ports: 
       - ${POSTGRES_PORT}:2701
     environment:
-      POSTGRES_DB: ${POSTGRE_DB_NAME}
+      POSTGRES_DB: ${POSTGRES_DB_NAME}
       POSTGRES_USER: ${POSTGRES_USERNAME}
       POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
     volumes: ["/data/db"]

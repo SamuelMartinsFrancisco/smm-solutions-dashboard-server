@@ -1,16 +1,17 @@
-version: "3.8"
-
 services:
-  mongodb: mongo:6.0
-  container_name: mongodb
-  restart: always
-  ports:
-    - "${MONGO_PORT}:27017"
-  environment:
-    MONGO_INITDB_ROOT_USERNAME: ${MONGO_INITDB_ROOT_USERNAME}
-    MONGO_INITDB_ROOT_USERNAME: ${MONGO_INITDB_ROOT_USERNAME}
-  volumes: 
-    - mongo_data:/data/db
+  postgres_db:
+    image: postgres
+    restart: always
+    ports: 
+      - ${POSTGRES_PORT}:2701
+    environment:
+      POSTGRES_DB: ${POSTGRE_DB_NAME}
+      POSTGRES_USER: ${POSTGRES_USERNAME}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+    volumes: ["/data/db"]
 
-volumes:
-  mongo_data:
+  adminer:
+    image: adminer
+    restart: always
+    ports:
+      - 8080:8080

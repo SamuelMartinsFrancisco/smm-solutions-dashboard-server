@@ -46,7 +46,7 @@ Depois que você tiver clonado o repositório, e instalado o Docker e o NVM, sig
 1. Acesse a pasta do projeto (smm-solutions-dashboard-server);
 2. Copie e cole o conteúdo de `env.example` em um novo arquivo chamado `.env`;
 3. No arquivo `.env`, substitua os campos indicados com valores de sua escolha, e salve-o;
-4. Abra o terminal, dentro de smm-solutions-server, e execute o comando `nvm install node`;
+4. Abra o terminal, dentro de smm-solutions-dashboard-server, e execute o comando `nvm install node`;
 5. Execute o comando `npm install`, para baixar os pedaços do quebra-cabeça que o projeto usa;
 <hr>
 
@@ -92,4 +92,5 @@ Sei que são muitos passos, mas é mesmo só da primeira vez. Depois, só será 
 <br>
 
 ## Considerações
-- Para interromper a execução do banco de dados, aperte `ctrl + c`; o servidor também pode ser parado da mesma forma.
+- Para interromper a execução do banco de dados, execute `docker compose down`; 
+- E, para interromper a execução do servidor do dashboard, pressione `ctrl + c`.

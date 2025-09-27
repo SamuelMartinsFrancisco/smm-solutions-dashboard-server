@@ -53,10 +53,11 @@ Depois que você tiver clonado o repositório, e instalado o Docker e o NVM, sig
 6. **Execute o banco de dados**  
 
     **Caso você esteja usando Docker Desktop:**  
-    - Siga as instruções da vídeo-aula, a mesma que você usou na instalação, mas neste momento do vídeo: [Docker Desktop - tutorial](https://youtu.be/cMyoSkQZ41E?t=392).  
+    - Siga também as instruções da vídeo-aula, a mesma que você usou na instalação, mas neste momento do vídeo: [Docker Desktop - tutorial](https://youtu.be/cMyoSkQZ41E?t=392).  
+        - Se atente somente aos passos de como abrir o terminal do Docker Desktop, e então siga os passos abaixo.
         - Lembre-se de que os comandos precisam ser executados dentro da pasta do projeto para funcionarem.
 
-    **Caso você esteja usando Docker Engine:**  
+    **Depois que você já estiver com o terminal do Docker aberto:**  
     >  Fazer o servidor do banco de dados funcionar;
     - docker compose up -d
     

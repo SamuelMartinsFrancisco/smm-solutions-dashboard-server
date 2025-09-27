@@ -1,6 +1,7 @@
 services:
   postgres_db:
     image: postgres
+    container_name: postgres_db
     restart: always
     ports: 
       - ${POSTGRES_PORT}:2701

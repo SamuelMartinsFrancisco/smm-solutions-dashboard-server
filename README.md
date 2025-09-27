@@ -57,7 +57,27 @@ Depois que você tiver clonado o repositório, e instalado o Docker e o NVM, sig
         - Lembre-se de que os comandos precisam ser executados dentro da pasta do projeto para funcionarem.
 
     **Caso você esteja usando Docker Engine:**  
-    - No terminal, dentro da pasta do projeto (smm-solutions-dashboard-server), execute o comando `sudo docker compose up`.
+    >  Fazer o servidor do banco de dados funcionar;
+    - docker compose up -d
+    
+    <br>
+
+    > Copiar o arquivo com o código SQL que cria a estrutura inicial do banco de dados para dentro do container;
+    - docker cp db-init.sql postgres_db:/tmp/db-init.sql
+     
+    <br>
+    
+    > Abrir o terminal do psql, onde é possível, entre outras coisas, executar consultas SQL;
+    - sudo docker exec -it postgres_db psql -U `<YOUR_DB_USERNAME>` -d smm_db
+     
+    <br>
+    
+    > Executar o código SQL do arquivo db-init.sql, para criar as tabelas do banco de dados;
+    - \i /tmp/db-init.sql
+     
+    <br>
+    
+    Por fim, execute `\dt` para ver as tabelas que foram criadas.
 <hr>
 
 7. Abra um novo terminal (também dentro da pasta do projeto);

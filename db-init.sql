@@ -1,6 +1,6 @@
 CREATE TABLE IF NOT EXISTS courses
 (
-    id VARCHAR(14) NOT NULL,
+    id VARCHAR(25) NOT NULL,
     title VARCHAR(50) NOT NULL,
     description VARCHAR(200) NOT NULL,
     img VARCHAR(60),
@@ -11,7 +11,7 @@ CREATE TABLE IF NOT EXISTS courses
 
 CREATE TABLE IF NOT EXISTS projects
 (
-    id VARCHAR(14) NOT NULL,
+    id VARCHAR(25) NOT NULL,
     name VARCHAR(50) NOT NULL,
     description VARCHAR(200) NOT NULL,
     img VARCHAR(60),
@@ -21,7 +21,7 @@ CREATE TABLE IF NOT EXISTS projects
 
 CREATE TABLE IF NOT EXISTS secrets_place
 (
-    id VARCHAR(14) NOT NULL,
+    id VARCHAR(25) NOT NULL,
     login VARCHAR(50) NOT NULL,
     password VARCHAR(60) NOT NULL,
     PRIMARY KEY (id)

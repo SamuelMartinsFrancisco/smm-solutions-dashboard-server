@@ -69,7 +69,7 @@ Depois que você tiver clonado o repositório, e instalado o Docker e o NVM, sig
     <br>
     
     > Abrir o terminal do psql, onde é possível, entre outras coisas, executar consultas SQL;
-    - sudo docker exec -it postgres_db psql -U `<YOUR_DB_USERNAME>` -d smm_db
+    - docker exec -it postgres_db psql -U `<YOUR_DB_USERNAME>` -d smm_db
      
     <br>
     

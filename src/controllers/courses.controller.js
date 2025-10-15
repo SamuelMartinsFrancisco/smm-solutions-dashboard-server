@@ -2,9 +2,32 @@ import * as services from '../services/courses.service.js';
 import { validationResult } from 'express-validator';
 import { handleRequestError, handleValidationError } from '../utils/errorHandlers.js';
 
-export const getAllCourses = async (req, res) => {
-    const operationResult = await services.getAllCourses();
-    res.status(200).send(operationResult);
+export const getAllCourses = async (_, res) => {
+    try {
+        const operationResult = await services.getAllCourses();
+        res.status(200).send(operationResult);
+    } catch (error) {
+        const errorResponse = handleRequestError(error);
+        res.status(errorResponse.status).send({ error: errorResponse.message }).end();
+    }
+}
+
+export const getCourse = async (req, res) => {
+    const errors = validationResult(req);
+
+    if (!errors.isEmpty()) {
+        const errorResponse = handleValidationError(errors.array());
+        res.status(400).send(errorResponse).end();
+        return;
+    }
+
+    try {
+        const operationResult = await services.getCourse(req.params.id);
+        res.status(200).send(operationResult);
+    } catch (error) {
+        const errorResponse = handleRequestError(error);
+        res.status(errorResponse.status).send({ error: errorResponse.message }).end();
+    }
 }
 
 export const addCourse = async (req, res) => {
@@ -25,15 +48,35 @@ export const addCourse = async (req, res) => {
     }
 }
 
-export const deleteCourse = async (req, res) => {
-    const courseId = req.params?.id;
+export const updateCourse = async (req, res) => {
+    const errors = validationResult(req);
 
-    if (!courseId) {
-        res.status(400).send({ error: 'You need to provided the ID of the course you want to delete' }).end();
+    if (!errors.isEmpty()) {
+        const errorResponse = handleValidationError(errors.array());
+        res.status(400).send(errorResponse).end();
+        return;
+    }
+    
+    try {
+        const operationResult = await services.updateCourse(req.body, req.params.id);
+        res.status(200).send(operationResult).end();
+    } catch (error) {
+        const errorResponse = handleRequestError(error);
+        res.status(errorResponse.status).send({ error: errorResponse.message }).end();
+    }
+}
+
+export const deleteCourse = async (req, res) => {
+    const errors = validationResult(req);
+
+    if (!errors.isEmpty()) {
+        const errorResponse = handleValidationError(errors.array());
+        res.status(400).send(errorResponse).end();
+        return;
     }
 
     try {
-        await services.deleteCourse(courseId);
+        await services.deleteCourse(req.params.id);
         res.status(204).end();
     } catch (error) {
         const errorResponse = handleRequestError(error);

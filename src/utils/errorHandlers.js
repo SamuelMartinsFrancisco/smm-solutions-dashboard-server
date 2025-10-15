@@ -11,7 +11,7 @@ const handleRequestError = (error) => {
             break;
         case 404: 
             response.status = 404;
-            response.message = "the resource you're looking for was not found";
+            response.message = error.message || "the resource you're looking for was not found";
         default: 
             break;
     }
@@ -39,4 +39,11 @@ const handleValidationError = (errors) => {
     return errorResponse;
 }
 
-export { handleRequestError, handleValidationError };
+class NotFoundError extends Error {
+    constructor(message) {
+        super(message);
+        this.status = 404;
+    }
+}
+
+export { handleRequestError, handleValidationError, NotFoundError };

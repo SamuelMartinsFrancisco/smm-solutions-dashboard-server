@@ -1,31 +1,37 @@
-import { query } from "../config/database.js";
-import { nanoid } from "nanoid";
+import CoursesRepository from "../repositories/courses.repository.js";
+import { NotFoundError } from "../utils/errorHandlers.js";
+import { splitArrayProps } from "../utils/splitArrayProps.js";
+ 
+const courses = new CoursesRepository();
 
 export const getAllCourses = async () => {
-    const { rows } = await query('SELECT * FROM courses');
-
-    return rows;
+    return await courses.findAll();
 }
+
+export const getCourse = async (id) => {
+    const result = await courses.findById(id);
+    
+    if (!result) throw new NotFoundError("Sorry, the course you're looking for was not be found");
+
+    return result; 
+} 
 
 export const addCourse = async (data) => {
-    const text = 'INSERT INTO courses(id, title, description, img, link, tags) VALUES ($1, $2, $3, $4, $5, $6) RETURNING *'
-    const values = [
-        nanoid(), 
-        data.title, 
-        data.description, 
-        data?.img ?? null, 
-        data.link, 
-        data.tags.toString()
-    ];
+    const tags = data.tags.toString();
 
-    const response = await query(text, values);
-    
-    return response.rows[0];
+    return await courses.create({...data, tags});
 }
 
-export const deleteCourse = async (courseId) => {
-    const text = `DELETE FROM courses WHERE id=$1`;
+export const updateCourse = async (data, id) => {
+    const tags = data?.tags?.toString();
+    const treatedData = tags ? {...data, tags} : data;
+    const result = await courses.update(treatedData, id);
 
-    await query(text, [courseId]);
-    return;
+    if (!result) throw new NotFoundError("Sorry, the course you're trying to edit was not found");
+
+    return result;
+}
+
+export const deleteCourse = async (id) => {
+    return await courses.delete(id);
 }

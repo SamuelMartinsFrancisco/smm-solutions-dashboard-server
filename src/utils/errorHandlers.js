@@ -1,7 +1,14 @@
+class NotFoundError extends Error {
+    constructor(message) {
+        super(message);
+        this.status = 404;
+    }
+}
+
 const handleRequestError = (error) => {
     const response = {
         status: 500,
-        message: `some error ocurred in our side while processing your request: ${error}`,
+        message: `some error ocurred in our side while processing your request` + error.message ? `: ${error.message}` : '',
     };
 
     switch (error.status) {
@@ -11,7 +18,7 @@ const handleRequestError = (error) => {
             break;
         case 404: 
             response.status = 404;
-            response.message = error.message || "the resource you're looking for was not found";
+            response.message = error.message ?? "the resource you're looking for was not found";
         default: 
             break;
     }
@@ -39,11 +46,10 @@ const handleValidationError = (errors) => {
     return errorResponse;
 }
 
-class NotFoundError extends Error {
-    constructor(message) {
-        super(message);
-        this.status = 404;
-    }
+const throwNotFoundError = (message) => {
+    throw new NotFoundError(
+        message ?? "the resource you're looking for was not found"
+    );
 }
 
-export { handleRequestError, handleValidationError, NotFoundError };
+export { handleRequestError, handleValidationError, throwNotFoundError };

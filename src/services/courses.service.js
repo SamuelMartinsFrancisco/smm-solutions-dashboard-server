@@ -1,5 +1,5 @@
 import CoursesRepository from "../repositories/courses.repository.js";
-import { NotFoundError } from "../utils/errorHandlers.js";
+import { throwNotFoundError } from "../utils/errorHandlers.js";
 import { splitArrayProps } from "../utils/splitArrayProps.js";
  
 const courses = new CoursesRepository();
@@ -11,7 +11,7 @@ export const getAllCourses = async () => {
 export const getCourse = async (id) => {
     const result = await courses.findById(id);
     
-    if (!result) throw new NotFoundError("Sorry, the course you're looking for was not be found");
+    if (!result) throwNotFoundError("sorry, the course you're looking for was not found");
 
     return result; 
 } 
@@ -27,7 +27,7 @@ export const updateCourse = async (data, id) => {
     const treatedData = tags ? {...data, tags} : data;
     const result = await courses.update(treatedData, id);
 
-    if (!result) throw new NotFoundError("Sorry, the course you're trying to edit was not found");
+    if (!result) throwNotFoundError("sorry, the course you're trying to edit was not found");
 
     return result;
 }

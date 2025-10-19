@@ -1,24 +1,9 @@
 import { checkSchema } from 'express-validator';
+import { stringValidation, idValidation, arrayValidation } from './defaultValidationSchemas.js';
 
 const defaultValidation = {
     in: 'body',
     exists: true,
-}
-
-const stringValidation = {
-    isString: true,
-    trim: true,
-    notEmpty: true,
-    errorMessage: 'This field is required, and must be a non-empty string'
-}
-
-const idValidation = {
-    ...stringValidation,
-    in: 'params',
-    isLength: { 
-        options: { min: 8, max: 8 },
-        errorMessage: 'This parameter is required and must be an 8-character string'
-    },
 }
 
 const validateCourseInputs = {
@@ -40,9 +25,7 @@ const validateCourseInputs = {
         },
         tags: {
             ...defaultValidation,
-            isArray: true,
-            custom: { options: (tags) => tags.length > 0 },
-            errorMessage: 'This field is required, and must be a non-empty array',
+            ...arrayValidation,
         },
         img: { 
             ...defaultValidation, 
@@ -69,9 +52,7 @@ const validateCourseInputs = {
         },
         tags: {
             ...defaultValidation,
-            isArray: true,
-            custom: { options: (tags) => tags.length > 0 },
-            errorMessage: 'This field is required, and must be a non-empty array',
+            ...arrayValidation,
             optional: true,
         },
         img: { 

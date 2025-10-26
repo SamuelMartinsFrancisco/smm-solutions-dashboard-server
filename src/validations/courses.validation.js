@@ -22,6 +22,10 @@ const validateCourseInputs = {
         link: { 
             ...defaultValidation,
             ...stringValidation,
+            escape: false,
+            blacklist: {
+                options: '<>',
+            },
         },
         tags: {
             ...defaultValidation,
@@ -48,6 +52,10 @@ const validateCourseInputs = {
         link: { 
             ...defaultValidation,
             ...stringValidation,
+            escape: false,
+            blacklist: {
+                options: '<>',
+            },
             optional: true,
         },
         tags: {

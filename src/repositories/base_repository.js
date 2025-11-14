@@ -10,16 +10,17 @@ export default class BaseRepository {
 
   mapInputs(data) {
     const properties = Object.keys(data);
-    const unavailableFields = properties.map(
+    const unavailableFields = [];
+    properties.forEach(
       (prop) => {
         if (
           prop === 'id' 
           || !this.fields.includes(prop)
-        ) return prop;
+        ) unavailableFields.push(prop);
       }
     );
 
-    if (unavailableFields) {
+    if (unavailableFields.length) {
       const message = "the following fields can't be edited or don't exists: " + unavailableFields.toString().replace(',', ', ');
       throw new BadRequestError(message);
     }
